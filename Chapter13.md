@@ -60,6 +60,7 @@ Byebye
 - 在后台模式中，进程运行时与终端会话的STDIN、STDOUT和STDERR无关
 - 以后台模式运行shell脚本，只要在脚本后面加上一个`&`符号
 - 退出终端，每个后台进程都连着一个终端会话(pts/0)
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter13$ ./test1 &
 [1] 1282		#作业编号和PID
@@ -75,6 +76,7 @@ vagrant@lucid32:~/linuxAndShell/chapter13$ Loop #2
 - 有时需要从终端会话启动脚本，然后让脚本结束之前以后台模式运行，可以用`nohup`命令实现
 - `nohup`会阻塞发送到进程的任何SIGHUP信号，可以防止在退出终端会话时退出进程
 - 因为`nohup`将进程与终端断开，所以进程没有STDOUT和STDERR输出连接，这些输出会被重定向到nohup.out的文件内(同一目录多个命令运行时须注意，都会重定向到同一个nohup.out文件里)
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter13$ nohup ./test1 &
 [1] 1292
@@ -84,6 +86,7 @@ utput to `nohup.out'
 
 ####作业控制
 - 查看作业：带加号的作业被视为默认作业，如果命令行没有作业编号，则它应该是任何作业控制命令引用的作业，带减号的是在处理完当前默认作业后会变为默认作业的作业。某一时间点，只能有一个带加号的作业，也只能有一个带减号的作业
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter13$ ./test2
 This is a test program
@@ -104,6 +107,7 @@ vagrant@lucid32:~/linuxAndShell/chapter13$ jobs
 - `nice -n 优先级 commands`
 - 提高优先级可能会失败，安全特性，防止用户以高优先级启动所有命令
 - renice可以修改进程优先级 `renice 优先级 -p PID`
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter13$ nice -n 5 ./test1 &
 [3] 1333
