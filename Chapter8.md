@@ -2,6 +2,7 @@
 ####创建脚本文件
 - 第一行须指明使用的shell: `#!/bin/bash`
 - 普通脚本文件中，#后的是注释，但是shell脚本文件的第一行是特例
+
 ```
 vagrant@lucid32:~/vimPractice$ ./test1
 -bash: ./test1: Permission denied
