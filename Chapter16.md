@@ -8,12 +8,14 @@
 ![](http://farm6.staticflickr.com/5464/9918515854_7423e5c302_o.jpg)
 
 - 在命令行中定义编辑器命令
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter16$ echo "This is a test"|sed 's/test/big test/'
 This is a big test
 ```
 
 - 多个命令需要使用`-e`，命令用分号隔开，命令结尾和分号之间不能有空格
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter16$ cat data1
 The quick brown fox jumps over the lazy dog.
@@ -24,6 +26,7 @@ The quick green fox jumps over the lazy cat.
 ```
 
 - 从文件读取编辑器命令
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter16$ cat script1
 s/brown/green/
@@ -41,6 +44,7 @@ The quick green elephant jumps over the lazy cat.
 ![](http://farm3.staticflickr.com/2849/9918607363_1ecc3357d3_o.jpg)
 
 - awk命令行假定脚本是单文本字符串，所以须将脚本包括在单引号内
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter16$ awk '{print "Hello world!"}'
 This is a test
@@ -56,28 +60,29 @@ Hello world!
 	- 多个命令可以用分号隔开，或者用每次输入一行(多行)
 
 			vagrant@lucid32:~/linuxAndShell/chapter16$ echo "My name is Rich"|awk '{$4="Dave";print $0}'
-My name is Dave
-vagrant@lucid32:~/linuxAndShell/chapter16$ awk '{
+			My name is Dave
+			vagrant@lucid32:~/linuxAndShell/chapter16$ awk '{
 			> $4="testing"
-> print $0}'
+			> print $0}'
 			This is not a good test.
 			This is not testing good test.
 
 	- 从文件读取程序
 
 			vagrant@lucid32:~/linuxAndShell/chapter16$ vim script2
-vagrant@lucid32:~/linuxAndShell/chapter16$ awk -F: -f !$ /etc/passwd
-awk -F: -f script2 /etc/passwd
-root's userid is root
-daemon's userid is daemon
-...
-vagrant@lucid32:~/linuxAndShell/chapter16$ cat script2
+			vagrant@lucid32:~/linuxAndShell/chapter16$ awk -F: -f !$ /etc/passwd
+			awk -F: -f script2 /etc/passwd
+			root's userid is root
+			daemon's userid is daemon
+			...
+			vagrant@lucid32:~/linuxAndShell/chapter16$ cat script2
 			{print $5 "'s userid is " $1}
 			
     - 在处理数据之前/之后运行脚本
         - awk允许指定运行脚本的时间，可能需要在处理数据之前运行脚本`awk 'BEGIN {print "title"} {print $0} END {print "end"}`
-        
-                vagrant@lucid32:~/linuxAndShell/chapter16$ cat script4
+
+```
+vagrant@lucid32:~/linuxAndShell/chapter16$ cat script4
 BEGIN {
     print "The latest list of users and shells"
     print "Userid       Shell"
@@ -86,10 +91,12 @@ BEGIN {
 }
 {
     print $1 "  " $7
-                }
-                END {
-                  print "This concludes the listing"
-                }
+}
+END {This\tline\tcontains\t\ttabs.$
+		
+    print "This concludes the listing"
+}
+```
 
 #### sed编辑器基础知识
 - 更多替换选项：`s/pattern/replacement/flag`
@@ -100,8 +107,8 @@ BEGIN {
     
             # -n 选项禁止sed编辑器的输出。然而，p替换标记会输出所有已修改的行，二者结合使用仅生成替换命令已更改的那些行的输出。
             vagrant@lucid32:~/linuxAndShell/chapter16$ sed -n 's/test/trail/p' data5
-This is a trail line.
-vagrant@lucid32:~/linuxAndShell/chapter16$ cat data5
+            This is a trail line.
+            vagrant@lucid32:~/linuxAndShell/chapter16$ cat data5
             This is a test line.
             This is a different line.
             
@@ -206,30 +213,26 @@ vagrant@lucid32:~/linuxAndShell/chapter16$ cat data5
                 > }' data6
                 4
                 This is line number 4.
+
+                vagrant@lucid32:~/linuxAndShell/chapter16$ sed -n 'l' data8 #\033是Esc键的ASCII码的八进制值
+		
+		`vagrant@lucid32:~/linuxAndShell/chapter16$ echo ^[[41m"test"^[[0m|sed 'l'`
+		`\033[41mtest\033[0m$`
+		`test`
                 
         - l (小写L): 列出行，允许打印数据流中的文本和不可打印的ASCII字符
-        
-                vagrant@lucid32:~/linuxAndShell/chapter16$ sed -n 'l' data8
-This\tline\tcontains\t\ttabs.$
-                #\033是Esc键的ASCII码的八进制值
-                vagrant@lucid32:~/linuxAndShell/chapter16$ echo ^[[41m"test"^[[0m|sed 'l'
-\033[41mtest\033[0m$
-                test
-
         - 将文件用于sed
             - 写文件，[address]w filename
-            
-                    vagrant@lucid32:~/linuxAndShell/chapter16$ sed '1,2w test' data6
-This is line number 1.
-This is line number 2.
-This is line number 3.
-This is line number 4.
-vagrant@lucid32:~/linuxAndShell/chapter16$ cat test
-                    This is line number 1.
-                    This is line number 2.
-                    
             - 从文件读取数据，[address]r filename，对于读命令，不能使用地址范围，只能指定单一的行号或文本模式地址，sed编辑器在该地址之后插入文件中的文本
             
+                    vagrant@lucid32:~/linuxAndShell/chapter16$ sed '1,2w test' data6
+                    This is line number 1.
+                    This is line number 2.
+                    This is line number 3.
+                    This is line number 4.
+                    vagrant@lucid32:~/linuxAndShell/chapter16$ cat test
+                    This is line number 1.
+                    This is line number 2.
                     vagrant@lucid32:~/linuxAndShell/chapter16$ sed '3r data7' data6
                     This is line number 1.
                     This is line number 2.
