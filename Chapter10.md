@@ -1,6 +1,7 @@
 ###更多结构化命令
 ####for命令
 - 语法
+
 ```
 for var in list
 do
@@ -27,6 +28,7 @@ Connecticut
 ```
 
 - 读取列表中的复杂值
+
 ```
 #! /bin/bash
 for test in I don't know if this'll work
@@ -44,6 +46,7 @@ word:work
 - 为了使for可以更好地区分不同值，可以使用双引号包围每个值，shell不会将双引号作为值的一部分
 
 - 从变量读取列表
+
 ```
 #!/bin/bash
 list="Alabama Alaska Arizona"
@@ -61,6 +64,7 @@ Arkansas
 ```
 
 - 读取命令中的值
+
 ```
 #! /bin/bash
 file="states"
@@ -111,13 +115,16 @@ done
 
 ####while命令
 - 用法
+
 ```
 while test commands
 do
     other commands
 done
 ```
+
 - 例子
+
 ```
 #!/bin/bash
 var1=10
@@ -129,6 +136,7 @@ done
 ```
 
 - 多条测试命令: 只按照最后一条测试命令的执行结果来决定循环是否停止
+
 ```
 while echo $var1
       [ $var1 -ge 0 ]
@@ -137,6 +145,7 @@ while echo $var1
 ####until命令
 - 与while相反，当执行退出状态非0，shell就会执行在循环中的命令，一旦测试返回条件为0，则退出循环
 - 用法
+
 ```
 until test commands
 do
@@ -146,6 +155,7 @@ done
 
 ####嵌套循环
 - 99乘法
+
 ```
 #!/bin/bash
 for (( i = 1; i <=9; i++))
@@ -160,6 +170,7 @@ done
 
 ####文件数据的循环
 - 可以通过改变IFS来对文件内容进行操作
+
 ```
 #!/bin/bash
 IFS.OLD=$IFS
@@ -179,6 +190,7 @@ done
 - break命令
 	- 多重循环时，break命令会自动终止所在的最里面的循环
 	- 跳出外循环 `break n` n表明要跳出的循环级别，如果n设置为2，break命令将停止外循环的下一级循环
+
 ```
 #!/bin/bash
 for (( a = 1; a < 4; a++ ))
@@ -204,6 +216,7 @@ Inner loop: 4
 
 - continue命令
 	- 和break一样，也可以用`continue n`
+
 ```
 #!/bin/bash
 for (( a = 1; a <= 5; a++ ))
