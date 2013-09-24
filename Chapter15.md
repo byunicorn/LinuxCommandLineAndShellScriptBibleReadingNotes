@@ -1,4 +1,3 @@
-
 ###在脚本中添加颜色
 ####创建文本菜单
 - 创建菜单布局
@@ -18,6 +17,7 @@ read -n 1 option #-n 1 表示只读一个字符，用户不用按enter
 
 - 创建菜单函数
 	- 可以为未实现的函数创建stub函数(尚未包含任何命令的函数)，为了可以顺利地进行调试
+
 ```
 function diskspace {
     clear
@@ -27,6 +27,7 @@ function diskspace {
 
 - select命令
 	- select命令允许从单命令行创建菜单，然后获取输入的答案并自动处理它
+
 ```
 select variable in list
 do
@@ -66,6 +67,7 @@ clear
 ![](http://farm4.staticflickr.com/3687/9918516344_24165592e7_o.jpg)
 
 - 显示ANSI转义码，问题是创建CSI字符，该字符通常是一个两字符序列：`ESC ASCII`值，后跟左方括号字符，需要在脚本中插入ESC值时，就需要用`Ctrl-V`组合键后跟ESC值，输入此组合键时，字符^[出现。
+
 ```
 #下面的命令将输入红底白字的This is a test，输出之后又恢复为普通模式，如果不恢复，则ANSI颜色控制会保持有效
 vagrant@lucid32:~/linuxAndShell/chapter15$ echo ^[[41mThis is a test^[[0m
@@ -77,6 +79,7 @@ This is a test
 
 ####制作窗口
 - dialog软件包
+
 ```
 dialog --widget parameters
 ```
