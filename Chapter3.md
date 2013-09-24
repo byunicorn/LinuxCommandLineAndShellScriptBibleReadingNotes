@@ -6,6 +6,7 @@
 * 控制命令行提示符的环境变量：
 	* PS1:默认命令行提示符的格式
 	* PS2:第二层命令行提示符的格式
+
 ```
 vagrant@web:/etc$ echo $PS1
 ${debian_chroot:+($debian_chroot)}\u@\h:\w\$ 
@@ -13,15 +14,18 @@ ${debian_chroot:+($debian_chroot)}\u@\h:\w\$
 vagrant@web:/etc$ echo $PS2
 >
 ```
+
 ####bash手册
 * man bash
 ####文件系统导航
 * Linux在一个目录结构中存储文件，该目录成为虚拟目录
 * 安装在Linux PC中的第一个硬盘称为**根驱动器**，其他目录都是从这里开始创建的
 * 在根驱动器中，Linux创建一些名为**挂载点**的特殊目录。挂载点是虚拟目录中用于分配额外存储设备的目录          
-![](http://img2.ph.126.net/u-xCYPx5g9h3FFA98JKErw==/683139768576884270.jpg)
+![](http://farm6.staticflickr.com/5488/9917989976_3068219384_o.jpg)
 * 上图中，Disk1与虚拟目录的根关联（/），其他硬盘可以挂载到虚拟目录结构的任何地方，Disk2挂载到了/home，这也是用户目录所在的位置       
-* **通用Linux目录名称**
+        
+**通用Linux目录名称**
+
 | 目录       | 用法           | 
 | ------------- |:-------------:|
 | /      | 虚拟目录的根目录，通常此处没有文件 |
@@ -48,6 +52,7 @@ vagrant@web:/etc$ echo $PS2
 	* 链接文件，如果需要在系统中维护同一个文件的两个（或以上）副本，不一定需要使用两个物理副本，可以使用一个物理副本和多个虚拟副本，这种虚拟副本称为链接`ln` `cp -l` `cp -s`
 	* 硬链接文件使用的索引节点编号与源文件相同，在移除了最后一个链接文件之前，硬链接文件将一直维护索引节点编号，并保留数据，但是对于软链接，底层文件不在了，那么链接的指向内容自然也消失了
 	* `touch`除了创建新文件外，还可以修改访问时间和修改时间，不改变文件内容`touch -a` `touch -m`
+
 ```
 vagrant@lucid32:~$ ls -F
 go1.1.1.linux-386.tar.gz  postinstall.sh*  vimPractice/
@@ -64,6 +69,7 @@ total 4
 vagrant@lucid32:~/vimPractice$ cat test3
 cat: test3: No such file or directory
 ```
+
 * 查看文件内容
 	* 查看文件统计数据
 		1. `stat test2` 提供文件系统中文件状态的完整摘要
