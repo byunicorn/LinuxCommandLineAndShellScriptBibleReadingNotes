@@ -1,6 +1,7 @@
 ###创建函数
 ####基本脚本函数
 - 定义函数
+
 ```
 #方法1
 function name{
@@ -17,6 +18,7 @@ name(){
 #### 返回值
 - 默认情况下，退出状态是函数最后一条命令返回的退出状态，函数执行完毕后，可以用`$?`(返回最近已执行命令的退出状态)来确定函数的退出状态
 - 使用return命令：在函数完成后尽快提取返回值；退出状态的取值范围是0~255
+
 ```
 #!/bin/bash
 function dbl { #注意：functionName后面一定要有一个空格
@@ -30,6 +32,7 @@ echo "The new value is $?"
 ```
 
 - 使用函数输出，函数的输出也可以捕获并存放到shell变量中
+
 ```
 #!/bin/bash
 function dbl {
@@ -43,6 +46,7 @@ echo "The new value is $result"
 ####在函数中使用变量
 - 向函数传递参数，和普通调用脚本一样
 - 如果想要调用脚本的参数，`./test1 10 15`，在函数中不能直接调用$1和$2来得到10和15，需要在使用函数时显式地传入`functionName $1 $2`
+
 ```
 #!/bin/bash
 function addem {
@@ -65,6 +69,7 @@ echo $value
 ```
 
 - 在函数中处理变量：全局变量和局部变量（local关键字）
+
 ```
 #!/bin/bash
 function dbl {
@@ -89,6 +94,7 @@ echo "The temp is $temp"
 
 ####数组变量和函数
 - 向函数传递数组：函数只会提取数组变量的第一个值，如果想解决这个问题，必须将数组拆开，传给函数后，再在函数体内重组
+
 ```
 #!/bin/bash
 function testit {
@@ -126,6 +132,7 @@ echo "The factorial of $value is: $result"
 ####库文件
 - shell函数的作用域，仅在其定义所处的shell会话中有效，如果从shell命令界面运行一个库文件，那么shell将会打开一个新的shell，并在新shell中运行这个脚本，这将为新shell定义函数。
 - `source`命令，source命令在当前运行的shell环境中执行，`source`有个短小的别名`.`
+
 ```
 #!/bin/bash
 . ./myfuncs #如果不使用source命令，则会新开一个shell，下面将无法调用myfuncs里的函数
@@ -143,6 +150,7 @@ echo "The result of dividing them is: $result3"
 ####在命令行中使用函数
 - 在命令行创建函数，如果定义在一行内，则每条命令的结尾必须包括分号
 - 用命令行创建函数时需要小心
+
 ```
 vagrant@lucid32:~/linuxAndShell/chapter14$ function divem { echo $[ $1 / $2 ];}
 vagrant@lucid32:~/linuxAndShell/chapter14$ divem 100 5
